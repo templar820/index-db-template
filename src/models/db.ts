@@ -3,14 +3,22 @@ import { populate } from './populate';
 import { TodoItem } from './TodoItem';
 import { TodoList } from './TodoList';
 
-export class TodoDB extends Dexie {
+
+// const db = new Dexie("MyDataBase").version(2);
+//
+// export default db;
+
+
+export class MyDataBase extends Dexie {
     todoLists!: Table<TodoList, number>;
     todoItems!: Table<TodoItem, number>;
     constructor() {
-        super('TodoDB');
+        super("MyDataBase");
         this.version(1).stores({
-            todoLists: '++id',
-            todoItems: '++id, todoListId'
+            todoLists: '&id',
+            todoItems: '&id, todoListId, title'
+        }).stores({
+            myCustom: "++id",
         });
     }
 
@@ -22,7 +30,7 @@ export class TodoDB extends Dexie {
     }
 }
 
-export const db = new TodoDB();
+export const db = new MyDataBase();
 
 db.on('populate', populate);
 
