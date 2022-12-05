@@ -12,7 +12,7 @@ export class MyDataBase extends Dexie {
         super("MyDataBase");
         this.version(1).stores({
             todoLists: '++id',
-            todoItems: '++id, todoListId, title'
+            todoItems: '++id, todoListId, title, [id+title]'
         }).stores({
             myCustom: "++id",
         });
