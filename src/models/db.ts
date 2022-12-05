@@ -4,10 +4,6 @@ import { TodoItem } from './TodoItem';
 import { TodoList } from './TodoList';
 
 
-// const db = new Dexie("MyDataBase").version(2);
-//
-// export default db;
-
 
 export class MyDataBase extends Dexie {
     todoLists!: Table<TodoList, number>;
@@ -15,8 +11,8 @@ export class MyDataBase extends Dexie {
     constructor() {
         super("MyDataBase");
         this.version(1).stores({
-            todoLists: '&id',
-            todoItems: '&id, todoListId, title'
+            todoLists: '++id',
+            todoItems: '++id, todoListId, title'
         }).stores({
             myCustom: "++id",
         });
